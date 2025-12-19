@@ -1,5 +1,4 @@
 <?php
-// database/migrations/xxxx_create_order_items_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,23 +11,27 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
 
+            // Relasi ke orders
             $table->foreignId('order_id')
-                ->constrained()
+                ->constrained('orders')
                 ->cascadeOnDelete();
 
-            // Restrict delete: jangan hapus produk kalau ada di order
+            // Relasi ke products
+            // Produk tidak boleh dihapus jika sudah ada di order
             $table->foreignId('product_id')
-                ->constrained()
+                ->constrained('products')
                 ->restrictOnDelete();
 
             // Snapshot data produk saat order
-            // (karena harga/nama produk bisa berubah di kemudian hari)
             $table->string('product_name');
             $table->decimal('price', 12, 2);
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
             $table->decimal('subtotal', 15, 2);
 
             $table->timestamps();
+
+            // Optional: index tambahan untuk performa
+            $table->index(['order_id', 'product_id']);
         });
     }
 

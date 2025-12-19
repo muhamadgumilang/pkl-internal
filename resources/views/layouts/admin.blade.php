@@ -92,7 +92,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.users.index') }}"
+                        {{-- <a href="{{ route('admin.users.index') }}" --}}
                            class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                             <i class="bi bi-people me-2"></i> Pengguna
                         </a>
@@ -103,7 +103,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports.sales') }}"
+                        {{-- <a href="{{ route('admin.reports.sales') }}" --}}
                            class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
                             <i class="bi bi-graph-up me-2"></i> Laporan Penjualan
                         </a>
@@ -144,7 +144,7 @@
 
             {{-- Flash Messages --}}
             <div class="px-4 pt-3">
-                @include('partials.flash-messages')
+                @include('profile.partials.flash-messages')
             </div>
 
             {{-- Page Content --}}
